@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "./ERC777.sol";
+import "./TokenERC777.sol";
 
 contract SeedPhaseERC777 is IERC777Recipient, Ownable {
     using SafeMath for uint;
@@ -25,10 +25,10 @@ contract SeedPhaseERC777 is IERC777Recipient, Ownable {
     // Is contract already receive tokens
     bool private _isTokenReceived;
     // ERC-777 token address
-    ERC777 private _token;
+    TokenERC777 private _token;
 
     constructor(
-        ERC777 token,
+        TokenERC777 token,
         uint256[] memory investorsTokens,
         address[] memory investorsAddresses) {
 
