@@ -49,12 +49,12 @@ contract SeedPhaseERC777 is IERC777Recipient, Ownable {
     }
 
     function tokensReceived(
-        address operator,
-        address from,
-        address to,
+        address,
+        address,
+        address,
         uint256 amount,
-        bytes calldata userData,
-        bytes calldata operatorData
+        bytes calldata,
+        bytes calldata
     ) external override {
 
         require(msg.sender == address(_token), "invalid token");
