@@ -1,0 +1,6 @@
+# All Idea junk files
+/.idea/
+*.iml
+
+# Build files
+/build/
