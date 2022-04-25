@@ -12,6 +12,11 @@ import "./TokenERC777.sol";
 contract SeedPhaseERC777 is IERC777Recipient, Ownable {
     using SafeMath for uint;
 
+    // Emitted when tokens received
+    event TokensReceived(address from, uint256 amount);
+    // Emitted when some percentage of tokens sends to investors
+    event TokensSendToInvestors(uint256 percentage);
+
     // Setting up registry
     IERC1820Registry internal constant _ERC1820_REGISTRY = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
     // Mapping of investors addresses to amount of tokens, that contract should send them
@@ -50,7 +55,7 @@ contract SeedPhaseERC777 is IERC777Recipient, Ownable {
 
     function tokensReceived(
         address,
-        address,
+        address from,
         address,
         uint256 amount,
         bytes calldata,
@@ -63,6 +68,8 @@ contract SeedPhaseERC777 is IERC777Recipient, Ownable {
             revert("tokens already received or amount is not valid");
         }
         _isTokenReceived = true;
+
+        emit TokensReceived(from, amount);
     }
 
     function isTokenReceived() public view returns (bool) {
@@ -86,11 +93,12 @@ contract SeedPhaseERC777 is IERC777Recipient, Ownable {
             uint256 tokensToSend = percentage.mul(_investorsTokensToSend[_investorsAddresses[i]]).div(100);
             tokensToSend = tokensToSend * 10 ** uint256(_token.decimals());
 
-            require(_token.transfer(_investorsAddresses[i], tokensToSend),
-                "something went wrong during token transfer to investor");
+            _token.send(_investorsAddresses[i], tokensToSend, "");
         }
 
         _percentagePaid += percentage;
+
+        emit TokensSendToInvestors(percentage);
     }
 
     function getTokensAmount() public view returns (uint256) {
