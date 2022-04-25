@@ -4,3 +4,9 @@
 
 # Build files
 /build/
+
+/node_modules/
+/coverage.json
+/package.json
+/package-lock.json
+/coverage/
