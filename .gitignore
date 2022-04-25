@@ -5,8 +5,11 @@
 # Build files
 /build/
 
+# Node modules
 /node_modules/
-/coverage.json
-/package.json
-/package-lock.json
+
+# Solidity-coverage plugin
 /coverage/
+
+# All json files
+*.json
