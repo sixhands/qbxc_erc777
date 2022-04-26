@@ -27,7 +27,7 @@ contract('SeedPhaseERC777', function (owner) {
     it('reverts transaction to seed contract when tokens already received or amount is not valid', async function () {
         await expectRevert(
             token.send(seed.address, 1, []),
-            'tokens already received or amount is not valid.',
+            'tokens already received or amount is not valid',
         );
     });
 
@@ -59,7 +59,7 @@ contract('SeedPhaseERC777', function (owner) {
         );
         await expectRevert(
             seed.transferToInvestors(10000000000000000000000n),
-            'percentage is not valid, you can send only 100 percents.',
+            'percentage is not valid, you can send only 100 percents',
         );
         await expectRevert(
             seed.transferToInvestors(0),

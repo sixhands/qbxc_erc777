@@ -1,4 +1,4 @@
-// conztracts/seed/erc777/SeedPhaseERC777.sol
+// conztracts/SeedPhaseERC777.sol
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
@@ -19,7 +19,7 @@ contract SeedPhaseERC777 is IERC777Recipient, Ownable {
 
     // Setting up registry
     IERC1820Registry internal constant _ERC1820_REGISTRY = IERC1820Registry(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24);
-    // Mapping of investors addresses to amount of tokens, that contract should send them
+    // Mapping of investors addresses to amount of tokens, that contract should send to them
     mapping (address => uint256) private _investorsTokensToSend;
     // Addresses array of investors wallets
     address[] private _investorsAddresses;
@@ -42,7 +42,7 @@ contract SeedPhaseERC777 is IERC777Recipient, Ownable {
         _percentagePaid = 0;
         _token = token;
 
-        // Setting up mapping of addresses investor and tokens for them
+        // Setting up mapping of investors addresses and tokens for them
         for (uint8 i = 0; i < investorsAddresses.length; i++) {
             _investorsTokensToSend[investorsAddresses[i]] = investorsTokens[i];
             _promisedTokensAmount += _investorsTokensToSend[_investorsAddresses[i]];
